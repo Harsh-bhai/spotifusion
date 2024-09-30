@@ -9,7 +9,7 @@ const MainSection = () => {
   console.log(session);
   
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero min-h-screen">
       <div className="hero-content text-center">
         <div className="max-w-2xl lg:-translate-y-1/4 -translate-y-1/2 ">
           <div className="flex justify-center items-center lg:space-x-10">
@@ -25,7 +25,7 @@ const MainSection = () => {
             </div>
           </div>
 
-          <button onClick={() => signIn("spotify")} className="btn lg:btn-lg bg-green-500 hover:bg-green-400 hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.7)] hover:shadow-green-400 text-black rounded-full mt-4">
+          <button onClick={() => signIn("spotify", { callbackUrl: "/options" })} className="btn lg:btn-lg bg-green-500 hover:bg-green-400 hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.7)] hover:shadow-green-400 text-black rounded-full mt-4">
             <span>Login with Spotify</span>
             <FaSpotify className="mr-2" />
           </button>

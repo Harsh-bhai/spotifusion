@@ -1,3 +1,4 @@
+
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/navbar";
@@ -23,7 +24,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${fontGeistSans.variable} ${fontGeistMono.variable} antialiased`}>
+      <body className={`${fontGeistSans.variable} ${fontGeistMono.variable} antialiased bg-base-200`}>
         <SessionWrapper>
           <Navbar />
           {children}

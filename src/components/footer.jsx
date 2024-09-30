@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 const Footer = () => {
   return (
-    <footer className="footer bg-base-200 text-neutral-content p-10">
+    <footer className="footer  text-neutral-content p-10">
   <aside>
   <Image src={'/logo/logo.png'} width={50} height={50} alt={'Spotifusion Logo'} />
     <p>
