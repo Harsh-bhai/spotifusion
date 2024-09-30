@@ -43,6 +43,9 @@ const Navbar = () => {
           <li>
             <Link href="/how-to-use">How to Use</Link>
           </li>
+          <li>
+            <Link href="/options">Options</Link>
+          </li>
         </ul>
       </div>
 
