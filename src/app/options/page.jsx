@@ -9,14 +9,13 @@ import { setPlaylists } from "@/redux/slices/playlistSlice";
 
 const Options = () => {
   const dispatch = useDispatch();
-  const spotifyApi = UseSpotify(); // Use the memoized spotifyApi
+  const spotifyApi = UseSpotify();
 
   useEffect(() => {
     if (spotifyApi) {
       spotifyApi.getUserPlaylists().then((data) => {
         if (data.body) {
-          console.log(data.body, "here");
-          dispatch(setPlaylists(data.body.items)); // Dispatch only serializable playlist data
+          dispatch(setPlaylists(data.body.items));
         }
       });
     }

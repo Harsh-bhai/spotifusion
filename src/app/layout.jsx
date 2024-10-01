@@ -1,9 +1,9 @@
-
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import SessionWrapper from "@/components/sessionWrapper";
+import ThemeProvider from "@/components/themeProvider";
 
 const fontGeistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,14 +24,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${fontGeistSans.variable} ${fontGeistMono.variable} antialiased bg-base-200`}>
+      <body
+        className={`${fontGeistSans.variable} ${fontGeistMono.variable} antialiased`}
+      >
         <SessionWrapper>
-          <Navbar />
-          {children}
-          <Footer />
+          <ThemeProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </ThemeProvider>
         </SessionWrapper>
       </body>
     </html>
   );
 }
-

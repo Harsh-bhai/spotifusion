@@ -20,7 +20,12 @@ const refreshAccessToken = async (token) => {
       refreshToken: refreshedToken.refresh_token ?? token.refreshToken,
     };
   } catch (error) {
-    console.error(error);
+    console.error("my error",error);
+    let a = {
+      ...token,
+      error: "RefreshAccessTokenError",
+    }
+    console.log(a, "session agya");
     return {
       ...token,
       error: "RefreshAccessTokenError",
