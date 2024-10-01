@@ -30,7 +30,7 @@ const Options = () => {
           symbol={<FaTags />}
           name="Add Tags"
           description="Organize your Spotify playlists effortlessly with custom tags and more."
-          route="/"
+          route="/playlists"
         />
         <OptionCard
           symbol={<MdInsights />}

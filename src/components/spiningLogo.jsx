@@ -16,7 +16,7 @@ const SpiningLogo = () => {
         alt="SpotiFusion Logo"
         width={50}
         height={50}
-        className="absolute size-8 lg:size-max top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        className="absolute size-8 lg:size-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       />
     </div>
   );
