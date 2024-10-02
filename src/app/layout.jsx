@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import SessionWrapper from "@/components/sessionWrapper";
 import ThemeProvider from "@/components/themeProvider";
 
+
 const fontGeistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--geist-sans-font",
@@ -22,18 +23,19 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <body
         className={`${fontGeistSans.variable} ${fontGeistMono.variable} antialiased`}
       >
-        <SessionWrapper>
-          <ThemeProvider>
-            <Navbar />
-            {children}
-            <Footer />
-          </ThemeProvider>
-        </SessionWrapper>
+          <SessionWrapper>
+            <ThemeProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </ThemeProvider>
+          </SessionWrapper>
       </body>
     </html>
   );

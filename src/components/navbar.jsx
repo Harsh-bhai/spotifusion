@@ -8,7 +8,7 @@
 
   const Navbar = () => {
     const dispatch = useDispatch();
-    const themes = ["light", "dark", "forest", "dracula", "dim"]
+    const themes = ["light", "dark", "forest", "halloween"]
     return (
       <div className="navbar ">
         {/* logo */}

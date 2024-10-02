@@ -33,7 +33,7 @@ module.exports = {
   ],
 
   daisyui: {
-    themes: ["light", "dark", "forest", "dracula", "dim"],
+    themes: ["light", "dark", "forest", "halloween", "wireframe"],
   },
   
 };

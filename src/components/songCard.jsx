@@ -2,8 +2,12 @@ import React from "react";
 import Image from "next/image";
 import TagBadge from "./TagBadge";
 import AddTagModal from "./addTagModal";
+import { useSelector } from "react-redux";
 
 export default function SongCard({ song, tags }) {
+
+  const { theme } = useSelector((state) => state.theme);
+
   return (
     <div className="flex items-start space-x-4 p-4 bg-base-100  rounded-lg shadow-lg">
       {/* Song Image */}
@@ -18,10 +22,10 @@ export default function SongCard({ song, tags }) {
       {/* Song Details */}
       <div className="flex flex-col">
         {/* Song Name */}
-        <h3 className="text-white text-lg font-semibold">{song.name}</h3>
+        <h3 className= {`${theme ==="light" ? "text-black" : "text-white"} text-lg font-semibold`}>{song.name}</h3>
 
         {/* Artists */}
-        <p className="text-gray-400">
+        <p className={`${theme ==="light" ? "text-gray-700" : "text-gray-400"}}`}>
           {song.artists.map((artist, index) => (
             <span key={artist.id}>
               {artist.name}
