@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import SessionWrapper from "@/components/wrappers/sessionWrapper";
 import ThemeProvider from "@/components/wrappers/themeProvider";
+import { getServerSession } from "next-auth";
 
 
 const fontGeistSans = localFont({
@@ -23,6 +24,9 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const { data: session } = getServerSession();
+
+  console.log(session, "session2");
   
   return (
     <html lang="en">

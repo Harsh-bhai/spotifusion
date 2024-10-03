@@ -43,32 +43,34 @@ export const authOptions = {
 
   callbacks: {
     async jwt({ token, account, user }) {
-      // initial sign in with spotify
       if (account && user) {
-        console.log("my account",account);
-        
+        console.log("Initial sign-in:", { account, user });
         return {
           ...token,
           accessToken: account.access_token,
           refreshToken: account.refresh_token,
           accessTokenExpires: account.expires_at * 1000,
+          username: account.providerAccountId,
         };
       }
-
-      // Return previous token if the access token has not expired yet
+    
       if (Date.now() < token.accessTokenExpires) {
+        console.log("Token is still valid:", token);
         return token;
       }
-
-      // Access token has expired, try to update it
+    
+      console.log("Token has expired, refreshing...");
       return await refreshAccessToken(token);
     },
+    
     async session({ session, token }) {
+      console.log("Session data:", { session, token });
       session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
       session.user.username = token.username;
       return session;
-    },
+    }
+    
   },
 };
 

@@ -1,6 +1,25 @@
+"use client";
 import React from 'react'
 import Image from 'next/image'
+import UseSpotify from '@/hooks/useSpotify'
+import { useEffect, useState } from 'react'
 const Profile = () => {
+  const spotifyApi = UseSpotify();
+
+  const [profile, setProfile] = useState()
+
+  useEffect(() => {
+    if (spotifyApi) {
+      spotifyApi.getMe().then((data) => {
+        if (data.body) {
+          console.log(data.body);
+          
+          setProfile(data.body);
+        }
+      });
+    }
+  }, [spotifyApi]);
+
   return (
     <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col lg:flex-row">

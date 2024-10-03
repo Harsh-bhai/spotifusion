@@ -4,10 +4,12 @@
   import Link from "next/link";
   import { MdOutlineDarkMode } from "react-icons/md";
   import { useThemeStore } from "@/store/useThemeStore";
+  import { useSpotifyStore } from "@/store/useSpotifyStore";
 
   const Navbar = () => {
     const themes = ["light", "dark", "forest", "halloween"]
     const {setTheme} = useThemeStore();
+    const {accessToken ,removeAccessToken} = useSpotifyStore();
     return (
       <div className="navbar ">
         {/* logo */}
@@ -80,7 +82,7 @@
             </ul>
           </div>
           {/* Profile */}
-          <div className="dropdown dropdown-end">
+          {accessToken && <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <Image
@@ -94,9 +96,9 @@
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
               <li><Link href="/profile">Profile</Link></li>
-              <li><a>Logout</a></li>
+              <li onClick={() => removeAccessToken()}><a>Logout</a></li>
             </ul>
-          </div>
+          </div>}
         </div>
       </div>
     );

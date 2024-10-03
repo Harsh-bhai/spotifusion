@@ -4,11 +4,16 @@ import SpiningLogo from "./spiningLogo";
 import { FaSpotify } from "react-icons/fa";
 import { signIn} from "next-auth/react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useSpotifyStore } from "@/store/useSpotifyStore";
+
 
 const MainSection = () => {
 
   const { data: session } = useSession();
   console.log(session);
+
+  const { accessToken } = useSpotifyStore();
   
   
   return (
@@ -28,10 +33,17 @@ const MainSection = () => {
             </div>
           </div>
 
-          <button onClick={() => signIn("spotify", { callbackUrl: "/options" })} className="btn lg:btn-lg bg-green-500 hover:bg-green-400 hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.7)] hover:shadow-green-400 text-black rounded-full mt-4">
+         {!accessToken ? <button onClick={() => signIn("spotify", { callbackUrl: "/options" })} className="btn lg:btn-lg bg-green-500 hover:bg-green-400 hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.7)] hover:shadow-green-400 text-black rounded-full mt-4">
             <span>Login with Spotify</span>
             <FaSpotify className="mr-2" />
           </button>
+          :
+          <Link href="/options">
+            <button className="btn lg:btn-lg bg-green-500 hover:bg-green-400 hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.7)] hover:shadow-green-400 text-black rounded-full mt-4">
+              <span>Get Started</span>
+              <FaSpotify className="mr-2" />
+            </button>
+          </Link>}
         </div>
       </div>
     </div>
