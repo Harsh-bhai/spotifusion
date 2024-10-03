@@ -5,6 +5,7 @@
   import { MdOutlineDarkMode } from "react-icons/md";
   import { useThemeStore } from "@/store/useThemeStore";
   import { useSpotifyStore } from "@/store/useSpotifyStore";
+  import { signOut } from "next-auth/react";
 
   const Navbar = () => {
     const themes = ["light", "dark", "forest", "halloween"]
@@ -96,7 +97,7 @@
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
               <li><Link href="/profile">Profile</Link></li>
-              <li onClick={() => removeAccessToken()}><a>Logout</a></li>
+              <li onClick={() => {removeAccessToken(); signOut({callbackUrl: "/"})}}><a>Logout</a></li>
             </ul>
           </div>}
         </div>
