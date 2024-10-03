@@ -3,12 +3,11 @@
   import Image from "next/image";
   import Link from "next/link";
   import { MdOutlineDarkMode } from "react-icons/md";
-  import { useDispatch } from "react-redux";
-  import { setTheme } from "@/redux/slices/themeSlice";
+  import { useThemeStore } from "@/store/useThemeStore";
 
   const Navbar = () => {
-    const dispatch = useDispatch();
     const themes = ["light", "dark", "forest", "halloween"]
+    const {setTheme} = useThemeStore();
     return (
       <div className="navbar ">
         {/* logo */}
@@ -71,7 +70,7 @@
               {themes.map((theme, index) => (
                 <li key={index}>
                   <button
-                    onClick={() => dispatch(setTheme(theme))}
+                    onClick={() => setTheme(theme)}
                     className="btn btn-ghost btn-sm rounded-btn">
                     {theme}
                   </button>

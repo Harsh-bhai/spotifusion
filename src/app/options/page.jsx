@@ -4,22 +4,20 @@ import React, { useEffect } from "react";
 import { FaTags } from "react-icons/fa";
 import { MdInsights } from "react-icons/md";
 import UseSpotify from "@/hooks/useSpotify";
-import { useSelector, useDispatch } from "react-redux";
-import { setPlaylists } from "@/redux/slices/playlistSlice";
+import { usePlaylistStore } from "@/store/usePlaylistStore";
 
 const Options = () => {
-  const dispatch = useDispatch();
   const spotifyApi = UseSpotify();
-
+  const { setPlaylists } = usePlaylistStore();
   useEffect(() => {
     if (spotifyApi) {
       spotifyApi.getUserPlaylists().then((data) => {
         if (data.body) {
-          dispatch(setPlaylists(data.body.items));
+          setPlaylists(data.body.items);
         }
       });
     }
-  }, [spotifyApi, dispatch]);
+  }, [spotifyApi, setPlaylists]);
 
   return (
     <div className="flex flex-col justify-center lg:space-y-20 items-center h-[90vh]">

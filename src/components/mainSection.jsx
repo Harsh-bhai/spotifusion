@@ -3,8 +3,13 @@ import React, { useState, useEffect } from "react";
 import SpiningLogo from "./spiningLogo";
 import { FaSpotify } from "react-icons/fa";
 import { signIn} from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const MainSection = () => {
+
+  const { data: session } = useSession();
+  console.log(session);
+  
   
   return (
     <div className="hero min-h-screen">

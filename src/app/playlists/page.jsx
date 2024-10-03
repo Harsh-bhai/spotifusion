@@ -1,12 +1,11 @@
 "use client";
 import PlaylistCard from "@/components/playlistCard";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setCurrPlaylist } from "@/redux/slices/playlistSlice";
 import { useRouter } from "next/navigation";
+import { usePlaylistStore } from "@/store/usePlaylistStore";
+
 const Playlist = () => {
-  const dispatch = useDispatch();
-  const { playlists } = useSelector((state) => state.playlist);
+  const { playlists, setCurrPlaylist } = usePlaylistStore();
   const router = useRouter();
   console.log(playlists);
 
@@ -23,7 +22,7 @@ const Playlist = () => {
             img={playlist.images[0]?.url || "/default-image.jpg"} // fallback if image is not available
             description={playlist.description || "No description available"}
             onClick={() => {
-              dispatch(setCurrPlaylist(playlist));
+              setCurrPlaylist(playlist);
               router.push("/add-tag");
             }}
           />

@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 import { LOGIN_URL } from "@/utils/loginConfig";
+import SpotifyWebApi from "spotify-web-api-node";
 
 const refreshAccessToken = async (token) => {
   try {
@@ -21,11 +22,6 @@ const refreshAccessToken = async (token) => {
     };
   } catch (error) {
     console.error("my error",error);
-    let a = {
-      ...token,
-      error: "RefreshAccessTokenError",
-    }
-    console.log(a, "session agya");
     return {
       ...token,
       error: "RefreshAccessTokenError",
@@ -49,11 +45,13 @@ export const authOptions = {
     async jwt({ token, account, user }) {
       // initial sign in with spotify
       if (account && user) {
+        console.log("my account",account);
+        
         return {
           ...token,
           accessToken: account.access_token,
           refreshToken: account.refresh_token,
-          accessTokenExpires: account.expires_at * 1000, // as it is in ms
+          accessTokenExpires: account.expires_at * 1000,
         };
       }
 

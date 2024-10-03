@@ -1,7 +1,7 @@
 "use client";
-import { useSelector } from 'react-redux';
+import { useThemeStore } from '@/store/useThemeStore';
 const ThemeProvider = ({ children }) => {
-    const { theme } = useSelector(state => state.theme);
+    const { theme } = useThemeStore();
     console.log(theme, "theme");
     
   

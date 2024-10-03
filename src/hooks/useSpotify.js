@@ -2,23 +2,25 @@
 import { signIn, useSession } from "next-auth/react";
 import SpotifyWebApi from "spotify-web-api-node";
 import { useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setAccessToken } from "@/redux/slices/spotifySlice";
+import { useSpotifyStore } from "@/store/useSpotifyStore";
 
 const UseSpotify = () => {
-  const dispatch = useDispatch();
   const { data: session, status } = useSession();
-  const accessToken = useSelector((state) => state.spotify.accessToken);
+  const { accessToken, setAccessToken } = useSpotifyStore();
 
   useEffect(() => {
     if (session && !accessToken) {
-      if (session.error === "RefreshAccessTokenError" || session.expires < Date.now()) {
+      if (
+        session.error === "RefreshAccessTokenError" ||
+        session.expires < Date.now()
+      ) {
+        console.log("happening");
         signIn();
       } else {
-        dispatch(setAccessToken(session.user.accessToken));
+        setAccessToken(session.user.accessToken);
       }
     }
-  }, [session, dispatch, accessToken]);
+  }, [session, accessToken, setAccessToken]);
 
   return useMemo(() => {
     if (accessToken) {
@@ -34,4 +36,3 @@ const UseSpotify = () => {
 };
 
 export default UseSpotify;
-

@@ -2,11 +2,12 @@ import React from "react";
 import Image from "next/image";
 import TagBadge from "./TagBadge";
 import AddTagModal from "./addTagModal";
-import { useSelector } from "react-redux";
+import { useThemeStore } from "@/store/useThemeStore";
+
 
 export default function SongCard({ song, tags }) {
 
-  const { theme } = useSelector((state) => state.theme);
+  const { theme } = useThemeStore();
 
   return (
     <div className="flex items-start space-x-4 p-4 bg-base-100  rounded-lg shadow-lg">
