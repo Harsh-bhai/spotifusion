@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import TagBadge from "./TagBadge";
+import TagBadge from "./tagBadge";
 import AddTagModal from "./addTagModal";
 import { useThemeStore } from "@/store/useThemeStore";
 

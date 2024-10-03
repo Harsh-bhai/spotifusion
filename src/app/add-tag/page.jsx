@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import UseSpotify from "@/hooks/useSpotify";
-import SongCard from "@/components/songCard";
+import SongCard from "@/components/tags/songCard";
 import { usePlaylistStore } from "@/store/usePlaylistStore";
 
 const AddTag = () => {

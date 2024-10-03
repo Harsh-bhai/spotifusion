@@ -1,5 +1,5 @@
 "use client";
-import OptionCard from "@/components/OptionCard";
+import OptionCard from "@/components/option/optionCard";
 import React, { useEffect } from "react";
 import { FaTags } from "react-icons/fa";
 import { MdInsights } from "react-icons/md";

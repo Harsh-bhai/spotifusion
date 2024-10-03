@@ -1,5 +1,5 @@
 "use client";
-import PlaylistCard from "@/components/playlistCard";
+import PlaylistCard from "@/components/playlist/playlistCard";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { usePlaylistStore } from "@/store/usePlaylistStore";

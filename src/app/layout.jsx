@@ -1,9 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import SessionWrapper from "@/components/sessionWrapper";
-import ThemeProvider from "@/components/themeProvider";
+import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
+import SessionWrapper from "@/components/wrappers/sessionWrapper";
+import ThemeProvider from "@/components/wrappers/themeProvider";
 
 
 const fontGeistSans = localFont({
