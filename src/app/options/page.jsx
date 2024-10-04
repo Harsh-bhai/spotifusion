@@ -5,15 +5,65 @@ import { FaTags } from "react-icons/fa";
 import { MdInsights } from "react-icons/md";
 import UseSpotify from "@/hooks/useSpotify";
 import { usePlaylistStore } from "@/store/usePlaylistStore";
+import { useTagStore } from "@/store/useTagStore";
+import { useSpotifyStore } from "@/store/useSpotifyStore";
 
 const Options = () => {
   const spotifyApi = UseSpotify();
   const { setPlaylists } = usePlaylistStore();
+  const { setTagMap } = useTagStore();
+  const { setSpotifyId } = useSpotifyStore();
+
+  const createSpotifyUser = async(userInfo) =>{
+    let data = await fetch("/api/addspotifyuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userInfo,
+        spotifyId: userInfo.id
+      })
+    })
+    let response = await data.json();
+    console.log(response, "response");
+  }
+
+  const fetchTags = async (spotifyId) => {
+    try {
+      const data = await fetch("/api/tags", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({spotifyId: spotifyId})
+      });
+      const tags = await data.json();
+      console.log(tags, "tags");
+      setTagMap(tags);
+    } catch (error) {
+      console.log("error :" , error);
+      
+    }
+    
+  }
+
+
   useEffect(() => {
     if (spotifyApi) {
       spotifyApi.getUserPlaylists().then((data) => {
         if (data.body) {
           setPlaylists(data.body.items);
+        }
+      });
+
+      spotifyApi.getMe().then((data) => {
+        if (data.body) {
+          console.log(data.body);
+          
+          createSpotifyUser(data.body);
+          fetchTags(data.body.id);
+          setSpotifyId(data.body.id);
         }
       });
     }

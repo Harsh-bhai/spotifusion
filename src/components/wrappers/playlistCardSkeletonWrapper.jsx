@@ -7,6 +7,7 @@ const PlaylistCardSkeletonWrapper = () => {
       <h1 className="text-4xl font-bold mb-10 text-green-600">
         Your Playlists
       </h1>
+      <p className="mb-10">Select a playlist to modify</p>
       <div className="grid place-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
         {Array.from({ length: 8 }).map((index) => (
           <PlaylistCardSkeleton key={index} />

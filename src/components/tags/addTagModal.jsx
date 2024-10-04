@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { IoIosAddCircle } from "react-icons/io";
+import { useTagStore } from "@/store/useTagStore";
 
-const AddTagModal = () => {
+const AddTagModal = ({songId}) => {
   const [tagName, setTagName] = useState("");
+  const { addTag, setTagSongId } = useTagStore();
+  
 
   const handleTagChange = (e) => {
     setTagName(e.target.value);
@@ -10,9 +13,11 @@ const AddTagModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can add the logic to save the tag
-    console.log("Tag Name Submitted:", tagName);
-    setTagName(""); // Reset the input field after submission
+    setTagSongId(songId);
+    addTag(tagName);
+    console.log("Tag added:", e.target.value);
+    
+    setTagName("");
     document.getElementById("TagModal").close(); // Close the modal after submission
   };
 
@@ -21,7 +26,7 @@ const AddTagModal = () => {
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <IoIosAddCircle
         onClick={() => document.getElementById("TagModal").showModal()}
-        className="text-3xl text-green-700 cursor-pointer"
+        className="text-3xl text-green-500 cursor-pointer hover:text-green-300 transition-colors"
       />
       <dialog id="TagModal" className="modal">
         <div className="modal-box">

@@ -9,6 +9,7 @@ const AddTag = () => {
   const spotifyApi = UseSpotify();
   const { currPlaylist } = usePlaylistStore();
   const [tracks, setTracks] = useState([]);
+
   useEffect(() => {
     if (spotifyApi) {
       spotifyApi.getPlaylistTracks(currPlaylist?.id).then((data) => {
@@ -19,8 +20,6 @@ const AddTag = () => {
     }
   }, [spotifyApi, currPlaylist]);
 
-  console.log(tracks, "tracks");
-
   return (
     <div>
       {tracks.length === 0 ? (
@@ -29,15 +28,10 @@ const AddTag = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
           {tracks.map((song) => {
             let track = song.track;
-            console.log(track, "song");
 
-            return (
-              <SongCard
-                key={track.id}
-                song={track}
-                tags={["rock", "soothing", "study"]}
-              />
-            );
+            if (track.name != "") {
+              return <SongCard key={track.id} song={track} />;
+            }
           })}
         </div>
       )}

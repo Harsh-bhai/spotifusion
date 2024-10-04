@@ -21,10 +21,20 @@ module.exports = {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 }
+        },
+        fadeOut: {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0 }
+        }
       },
       animation: {
         wiggle: 'wiggle 1s ease-in-out infinite',
         slowSpin: 'slowSpin 7s linear infinite',
+        open : "fadeIn 0.2s forwards",
+        close : "fadeOut 0.2s forwards",
       },
     },
   },

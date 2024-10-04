@@ -12,20 +12,20 @@ const followersSchema = new mongoose.Schema({
 }, { _id: false });
 
 const explicitContentSchema = new mongoose.Schema({
-    filter_enabled: { type: Boolean, required: true },
-    filter_locked: { type: Boolean, required: true }
+    filter_enabled: { type: Boolean },
+    filter_locked: { type: Boolean }
 }, { _id: false });
 
 const userSchema = new mongoose.Schema({
-    display_name: { type: String, required: true },
+    display_name: { type: String },
     external_urls: {
-        spotify: { type: String, required: true }
+        spotify: { type: String }
     },
-    href: { type: String, required: true },
+    href: { type: String },
     id: { type: String, required: true, unique: true },
-    images: { type: [imageSchema], required: true },
-    type: { type: String, required: true },
-    uri: { type: String, required: true },
+    images: { type: [imageSchema] },
+    type: { type: String },
+    uri: { type: String },
     followers: { type: followersSchema, required: true },
     country: { type: String, required: true },
     product: { type: String, required: true },

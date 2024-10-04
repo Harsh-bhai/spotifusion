@@ -8,7 +8,7 @@ import PlaylistCardSkeletonWrapper from "@/components/wrappers/playlistCardSkele
 const Playlist = () => {
   const { playlists, setCurrPlaylist } = usePlaylistStore();
   const router = useRouter();
-  console.log(playlists);
+  // console.log(playlists);
 
   return (
     <div>
@@ -16,7 +16,7 @@ const Playlist = () => {
         <h1 className="text-4xl font-bold mb-4 text-green-600">
           Your Playlists
         </h1>
-        <p className="mb-10">Select a playlist to modify by adding tags</p>
+        <p className="mb-10">Select a playlist to modify</p>
         <div className="grid place-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
           {playlists.map((playlist) => (
             <PlaylistCard
