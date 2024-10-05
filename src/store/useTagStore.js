@@ -9,6 +9,12 @@ const setup = (set) => ({
       ...newTagMap,
     },
   })),
+
+  playListTagArray: [],
+  setplayListTagArray: (playListTagArray) => set({ playListTagArray }),
+
+  tagSongIdMap: {},
+  setTagSongIdMap : (tagSongIdMap) => set({ tagSongIdMap }),
 })
 
 export const useTagStore = create(

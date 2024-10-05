@@ -29,24 +29,6 @@ const Options = () => {
     console.log(response, "response");
   }
 
-  const fetchTags = async (spotifyId) => {
-    try {
-      const data = await fetch("/api/tags", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({spotifyId: spotifyId})
-      });
-      const tags = await data.json();
-      console.log(tags, "tags");
-      setTagMap(tags);
-    } catch (error) {
-      console.log("error :" , error);
-      
-    }
-    
-  }
 
 
   useEffect(() => {
@@ -62,7 +44,7 @@ const Options = () => {
           console.log(data.body);
           
           createSpotifyUser(data.body);
-          fetchTags(data.body.id);
+          // fetchTags(data.body.id);
           setSpotifyId(data.body.id);
         }
       });
@@ -70,9 +52,12 @@ const Options = () => {
   }, [spotifyApi, setPlaylists]);
 
   return (
-    <div className="flex flex-col justify-center lg:space-y-20 items-center h-[90vh]">
-      <h1 className="text-4xl font-bold mb-12">Choose Your Option</h1>
-      <div className="flex flex-col lg:flex-row justify-evenly gap-4 lg:gap-0 items-center w-full lg:mx-20">
+    <div className="min-h-screen flex flex-col items-center py-12 px-4 lg:px-16">
+      <h1 className="text-4xl font-bold mb-4 text-green-600">
+          Options
+        </h1>
+        <p className="mb-10">Choose an option</p>
+      <div className="flex lg:mt-20 flex-col lg:flex-row justify-evenly gap-4 lg:gap-0 items-center w-full lg:mx-20">
         <OptionCard
           symbol={<FaTags />}
           name="Add Tags"

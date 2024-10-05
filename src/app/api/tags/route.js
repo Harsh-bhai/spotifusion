@@ -21,26 +21,36 @@ const handler = async (req, res) => {
 
 const puthandler = async (req, res) => {
     let body = await req.json();
-    console.log("mera bhai", body);
+  
     try {
-        const { spotifyId, tags } = body;
-        console.log("mera tag", spotifyId);
-        
-        
-        const updateResult = await SpotifyUser.updateOne(
-            { spotifyId },
-            { $set: {tags} }
-        );
-
-        if (updateResult.modifiedCount === 0) {
-            return NextResponse.json({ error: "No tags updated or user not found" }, { status: 200 });
+      const { spotifyId, tags } = body;
+  
+      // Extracting playlistId and songId from the provided tags object
+      const playlistId = Object.keys(tags)[0];  // Assuming only one playlist is being updated
+      const songId = Object.keys(tags[playlistId])[0];
+      const newTags = tags[playlistId][songId]; // The new tag array for the song
+  
+      // Updating only the song's tag array in the specific playlist
+      const updateResult = await SpotifyUser.updateOne(
+        { spotifyId },
+        {
+          $set: {
+            [`tags.${playlistId}.${songId}`]: newTags, // Dynamic update path for the specific song's tags
+          },
         }
-
-        return NextResponse.json({ message: "Tags updated successfully" }, { status: 200 });
+      );
+  
+      if (updateResult.modifiedCount === 0) {
+        return NextResponse.json({ error: "No tags updated or user not found" }, { status: 200 });
+      }
+  
+      return NextResponse.json({ message: "Tags updated successfully" }, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error("Error updating tags:", error);
+      return NextResponse.json({ error: error.message }, { status: 400 });
     }
-}
+  };
+  
 
 const posthandler = connectDB(handler);
 const putHandler = connectDB(puthandler);

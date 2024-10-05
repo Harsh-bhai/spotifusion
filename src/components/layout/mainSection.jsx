@@ -6,6 +6,7 @@ import { signIn} from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSpotifyStore } from "@/store/useSpotifyStore";
+import SpotifyButton from "./spotifyButton";
 
 
 const MainSection = () => {
@@ -33,16 +34,10 @@ const MainSection = () => {
             </div>
           </div>
 
-         {!accessToken ? <button onClick={() => signIn("spotify", { callbackUrl: "/options" })} className="btn lg:btn-lg bg-green-500 hover:bg-green-400 hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.7)] hover:shadow-green-400 text-black rounded-full mt-4">
-            <span>Login with Spotify</span>
-            <FaSpotify className="mr-2" />
-          </button>
+         {!accessToken ? <SpotifyButton text={"Login with Spotify"} onClick={() => signIn("spotify", { callbackUrl: "/options" })}/>
           :
           <Link href="/options">
-            <button className="btn lg:btn-lg bg-green-500 hover:bg-green-400 hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.7)] hover:shadow-green-400 text-black rounded-full mt-4">
-              <span>Get Started</span>
-              <FaSpotify className="mr-2" />
-            </button>
+            <SpotifyButton text={"Get Started"} />
           </Link>}
         </div>
       </div>

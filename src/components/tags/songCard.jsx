@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import TagBadge from "./tagBadge";
@@ -21,7 +22,7 @@ export default function SongCard({ song }) {
     setTagArray(tags);
   }, []);
 
-  const removeTag = (tag) => {
+  const removeTag = async (tag) => {
     const updatedTags = tagArray.filter((t) => t !== tag);
     setTagArray(updatedTags);
 
@@ -36,8 +37,12 @@ export default function SongCard({ song }) {
         [currPlaylist.id]: updatedSongMap,
       };
     });
+    await updateTags({
+      [currPlaylist.id]: {
+        [song.id]: [...updatedTags], // Ensure you're sending the right data
+      },
+    }, spotifyId);
     console.log(tagMap, "tagMap");
-    
   };
 
   const addTag = (tag) => {
@@ -48,9 +53,9 @@ export default function SongCard({ song }) {
     setTagName(e.target.value);
   };
 
-  const updateTags = async (tags , spotifyId) => {
+  const updateTags = async (tags, spotifyId) => {
     console.log("updating tags", tagMap);
-    
+
     try {
       const tagsToSend = { tags, spotifyId };
       await fetch("/api/tags", {
@@ -69,24 +74,24 @@ export default function SongCard({ song }) {
     e.preventDefault();
 
     console.log(tagName, "tagName");
-  
+
     if (tagName) {
       addTag(tagName);
       // Update the global tagMap by merging the existing state
       setTagMap((prevTagMap) => {
         // Get the current song's existing tags or initialize with an empty array
-  
+
         // Create a new array of tags, ensuring no duplicates
         const updatedTags = [...new Set(tagArray)];
-        
-        
-  
+
+        //FIXME - fix api as now it is updating whole tag field,
+
         // Construct the updated tag map for the current playlist
         const updatedSongMap = {
-          ...prevTagMap[currPlaylist.id],  // Retain other songs in the playlist
-          [song.id]: updatedTags,           // Update the current song's tags
+          ...prevTagMap[currPlaylist.id], // Retain other songs in the playlist
+          [song.id]: updatedTags, // Update the current song's tags
         };
-  
+
         // Return the new tag map, ensuring the playlist structure is preserved
         return {
           ...prevTagMap,
@@ -94,24 +99,35 @@ export default function SongCard({ song }) {
         };
       });
       console.log(tagArray, "updatedTags");
-  
+
       // Clear input field and close the modal
       setTagName("");
       setIsModalOpen(false);
-  
-      // Sync the updated tagMap with the backend
-      await updateTags({ 
+      setTagMap({
         [currPlaylist.id]: {
-          [song.id]: [...tagArray, tagName]  // Ensure you're sending the right data
-        } 
-      }, spotifyId);
+          [song.id]: [...tagArray, tagName], // Ensure you're sending the right data
+        },
+      })
+
+      // Sync the updated tagMap with the backend
+      await updateTags(
+        {
+          [currPlaylist.id]: {
+            [song.id]: [...tagArray, tagName], // Ensure you're sending the right data
+          },
+        },
+        spotifyId
+      );
     }
   };
-  
-  
 
   return (
-    <div className="flex items-start space-x-4 p-4 bg-base-100 rounded-lg shadow-lg">
+    <div
+      className={`flex items-start space-x-4 p-4 ${
+        theme === "light" ? "bg-gray-300" : "bg-neutral"
+      } rounded-lg shadow-lg`}
+    >
+      
       <Image
         src={song.album.images[2]?.url}
         alt={song.name}
@@ -120,10 +136,16 @@ export default function SongCard({ song }) {
         className="w-16 h-16 object-cover rounded-md"
       />
       <div className="flex flex-col">
-        <h3 className={`${theme === "light" ? "text-black" : "text-white"} text-lg font-semibold`}>
+        <h3
+          className={`${
+            theme === "light" ? "text-black" : "text-white"
+          } text-lg font-semibold`}
+        >
           {song.name}
         </h3>
-        <p className={`${theme === "light" ? "text-gray-700" : "text-gray-400"}`}>
+        <p
+          className={`${theme === "light" ? "text-gray-700" : "text-gray-400"}`}
+        >
           {song.artists.map((artist, index) => (
             <span key={artist.id}>
               {artist.name}
@@ -134,7 +156,12 @@ export default function SongCard({ song }) {
 
         <div className="flex flex-wrap justify-start items-center mt-2 max-w-full">
           {tagArray.map((tag, index) => (
-            <TagBadge key={`${tag}-${song.id}`} index={index} text={tag} onClick={() => removeTag(tag)} />
+            <TagBadge
+              key={`${tag}-${song.id}`}
+              index={index}
+              text={tag}
+              onClick={async () => await removeTag(tag)}
+            />
           ))}
           <div>
             <IoIosAddCircle
@@ -146,8 +173,8 @@ export default function SongCard({ song }) {
 
         {/* Local modal for adding tags */}
         {isModalOpen && (
-          <dialog open className="modal animate-open">
-            <div className="modal-box">
+          <dialog open className="modal animate-open ">
+            <div className="modal-box  hover shadow-[0_0_15px_5px_rgba(0,0,0,0.7)] ">
               <h3 className="font-bold text-lg">Add a New Tag</h3>
               <form onSubmit={handleSubmit} className="py-4">
                 <input
@@ -157,9 +184,12 @@ export default function SongCard({ song }) {
                   placeholder="Enter tag name"
                   className="input input-bordered w-full"
                   required
+                  autoFocus // Automatically focus this input
                 />
                 <div className="modal-action">
-                  <button type="submit" className="btn">Add Tag</button>
+                  <button type="submit" className="btn">
+                    Add Tag
+                  </button>
                   <button
                     type="button"
                     className="btn"
