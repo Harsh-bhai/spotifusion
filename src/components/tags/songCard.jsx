@@ -26,23 +26,19 @@ export default function SongCard({ song }) {
     const updatedTags = tagArray.filter((t) => t !== tag);
     setTagArray(updatedTags);
 
-    setTagMap((prevTagMap) => {
-      const updatedSongMap = {
-        ...(prevTagMap[currPlaylist.id] || {}),
-        [song.id]: updatedTags,
-      };
+    const updatedSongMap = {
+      ...(tagMap[currPlaylist.id] || {}),
+      [song.id]: updatedTags,
+    };
 
-      return {
-        ...prevTagMap,
-        [currPlaylist.id]: updatedSongMap,
-      };
-    });
+    setTagMap({ ...tagMap, [currPlaylist.id]: updatedSongMap });
+
     await updateTags({
       [currPlaylist.id]: {
         [song.id]: [...updatedTags], // Ensure you're sending the right data
       },
     }, spotifyId);
-    console.log(tagMap, "tagMap");
+    
   };
 
   const addTag = (tag) => {
@@ -54,7 +50,6 @@ export default function SongCard({ song }) {
   };
 
   const updateTags = async (tags, spotifyId) => {
-    console.log("updating tags", tagMap);
 
     try {
       const tagsToSend = { tags, spotifyId };
@@ -73,41 +68,16 @@ export default function SongCard({ song }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(tagName, "tagName");
-
-    if (tagName) {
       addTag(tagName);
-      // Update the global tagMap by merging the existing state
-      setTagMap((prevTagMap) => {
-        // Get the current song's existing tags or initialize with an empty array
+      const updatedTags = [...new Set([...tagArray, tagName])];
+      const updatedSongMap = {
+        ...tagMap[currPlaylist.id], // Retain other songs in the playlist
+        [song.id]: updatedTags, // Update the current song's tags
+      };
 
-        // Create a new array of tags, ensuring no duplicates
-        const updatedTags = [...new Set(tagArray)];
-
-        //FIXME - fix api as now it is updating whole tag field,
-
-        // Construct the updated tag map for the current playlist
-        const updatedSongMap = {
-          ...prevTagMap[currPlaylist.id], // Retain other songs in the playlist
-          [song.id]: updatedTags, // Update the current song's tags
-        };
-
-        // Return the new tag map, ensuring the playlist structure is preserved
-        return {
-          ...prevTagMap,
-          [currPlaylist.id]: updatedSongMap,
-        };
-      });
-      console.log(tagArray, "updatedTags");
-
-      // Clear input field and close the modal
+      setTagMap({...tagMap, [currPlaylist.id]: updatedSongMap});
       setTagName("");
       setIsModalOpen(false);
-      setTagMap({
-        [currPlaylist.id]: {
-          [song.id]: [...tagArray, tagName], // Ensure you're sending the right data
-        },
-      })
 
       // Sync the updated tagMap with the backend
       await updateTags(
@@ -118,7 +88,8 @@ export default function SongCard({ song }) {
         },
         spotifyId
       );
-    }
+      console.log("Tags updated:", tagMap);
+      
   };
 
   return (
@@ -160,7 +131,7 @@ export default function SongCard({ song }) {
               key={`${tag}-${song.id}`}
               index={index}
               text={tag}
-              onClick={async () => await removeTag(tag)}
+              onClick={async () => {await removeTag(tag); console.log(tagMap, "tagMap");}}
             />
           ))}
           <div>

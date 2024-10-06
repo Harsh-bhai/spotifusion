@@ -7,13 +7,13 @@ const SuccessModal = ({ playlistId }) => {
     const spotifyWebUrl = `https://open.spotify.com/playlist/${playlistId}`; // Web URL
 
     // Open Spotify client
+    document.getElementById("playlistcreated").close()
     window.location.href = spotifyUri;
 
     // Fallback to the web player after a short delay
     setTimeout(() => {
       window.open(spotifyWebUrl, "_blank");
     }, 1000); // Adjust delay if needed
-    () => document.getElementById("playlistcreated").close()
   };
 
   return (
@@ -31,7 +31,7 @@ const SuccessModal = ({ playlistId }) => {
             </button>
             <form method="dialog">
               {/* If there is a button in the form, it will close the modal */}
-              <button className="btn">Close</button>
+              <button className="btn hover:text-black hover:bg-green-500">Close</button>
             </form>
           </div>
         </div>

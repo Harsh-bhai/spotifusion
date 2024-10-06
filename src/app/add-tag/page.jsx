@@ -34,14 +34,12 @@ const AddTag = () => {
   }, [spotifyApi, currPlaylist]);
 
   useEffect(() => {
+    fetchTags(spotifyId)
     calculateTags();
-    fetchTags(spotifyId);
     calcTagSongIdMap();
   }, []);
 
   useEffect(() => {
-    console.log("123");
-    
     calculateTags();
     calcTagSongIdMap();
   }, [tagMap]);
@@ -117,7 +115,7 @@ const AddTag = () => {
                   <h1 className="text-4xl font-bold mb-4 text-green-600">
                     {currPlaylist?.name}
                   </h1>
-                  <p className="mb-3">Add tags to your playlist</p>
+                  <p className="mb-3">Add tags to your songs. Songs with same tags will be grouped together and exported as a playlist to your spotify account.</p>
                 </div>
                 <MyButton
                   text={"Create Playlist"}

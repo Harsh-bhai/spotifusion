@@ -47,7 +47,7 @@ const puthandler = async (req, res) => {
       return NextResponse.json({ message: "Tags updated successfully" }, { status: 200 });
     } catch (error) {
       console.error("Error updating tags:", error);
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      return NextResponse.json({ error: error }, { status: 400 });
     }
   };
   

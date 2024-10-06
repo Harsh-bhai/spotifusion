@@ -17,9 +17,6 @@ const PlayListDialog = ({ tagArray, setPlaylistId }) => {
     const songUris = tagSongIdMap[tagName].map(id => `spotify:track:${id}`);
     console.log(songUris, "songUris");
     
-
-    
-    
     try {
       // 1. Create a new playlist
       const createPlaylistResponse = await spotifyApi.createPlaylist(playlistName, {
@@ -84,7 +81,7 @@ const PlayListDialog = ({ tagArray, setPlaylistId }) => {
             {/* Close the modal on this button */}
             <button
               type="button"
-              className="btn"
+              className="btn hover:text-black hover:bg-green-500"
               onClick={handleClose} // Close modal here
             >
               Close
