@@ -49,7 +49,7 @@ const Options = () => {
         }
       });
     }
-  }, [spotifyApi, setPlaylists]);
+  }, [spotifyApi, setPlaylists, setSpotifyId]);
 
   return (
     <div className="min-h-screen flex flex-col items-center py-12 px-4 lg:px-16">
@@ -68,7 +68,7 @@ const Options = () => {
           symbol={<MdInsights />}
           name="Analytics"
           description="Gain insights into your listening habits and optimize your playlists for a personalized experience."
-          route="/options"
+          route="/analytics"
         />
       </div>
     </div>

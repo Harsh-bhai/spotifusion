@@ -11,6 +11,9 @@ const setup = (set) => ({
 
   spotifyId: null,
   setSpotifyId: (spotifyId) => set({ spotifyId }),
+
+  artists: [],
+  setArtists: (artists) => set({ artists }),
 });
 
 export const useSpotifyStore = create(

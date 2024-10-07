@@ -4,6 +4,9 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { useMemo, useEffect } from "react";
 import { useSpotifyStore } from "@/store/useSpotifyStore";
 
+/**
+ * @returns {SpotifyWebApi | null} 
+ */
 const UseSpotify = () => {
   const { data: session, status } = useSession();
   const { accessToken, setAccessToken } = useSpotifyStore();
