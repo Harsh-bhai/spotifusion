@@ -1,13 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import UseSpotify from "@/hooks/useSpotify";
 import { useState, useEffect } from "react";
 import HeadingWrapper from "../wrappers/headingWrapper";
 import Divider from "../layout/divider";
 import ArtistCard from "./artistCard";
+import { useRecomendStore } from "@/store/useRecomendStore";
 
 const TopArtists = () => {
   const spotifyApi = UseSpotify();
   const [artists, setArtists] = useState();
+  const {artistsArr, setArtistsArr} = useRecomendStore();
   useEffect(() => {
     if (spotifyApi) {
       spotifyApi.getMyTopArtists().then((data) => {
@@ -16,8 +19,17 @@ const TopArtists = () => {
         }
       });
     }
+
+    pushArtistsIds();
+    
   }, [spotifyApi]);
-  console.log(artists, "artists");
+
+  const pushArtistsIds = () => {
+    if (artists) {
+      setArtistsArr(artists.slice(0, 5).map((artist) => artist.id));
+    }
+  };
+
 
   return (
     <div>

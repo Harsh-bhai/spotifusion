@@ -1,11 +1,10 @@
 import Image from "next/image";
 import { useThemeStore } from "@/store/useThemeStore";
-import TagBadge from "../tags/tagBadge";
-
+import Link from "next/link";
 const ArtistCard = ({ artist }) => {
   const { theme } = useThemeStore();
   return (
-    <div
+    <Link href= {artist.external_urls?.spotify} target="_blank"
       className={`group card card-compact card-bordered ${
         theme === "light" ? "bg-gray-300" : "bg-neutral"
       } w-72 shadow-lg hover:shadow-[0_0_15px_5px_rgba(34,197,94,0.7)] 
@@ -31,7 +30,7 @@ const ArtistCard = ({ artist }) => {
           {artist.name}
         </h2>
       </div>
-    </div>
+    </Link>
   );
 };
 

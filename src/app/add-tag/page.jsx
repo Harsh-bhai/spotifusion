@@ -110,7 +110,7 @@ const AddTag = () => {
               <div className="flex justify-center">
                 <SearchBar onSearch={setSearchTerm} /> {/* Pass setSearchTerm as a prop */}
               </div>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col lg:flex-row my-6 justify-between items-center">
                 <div className="flex flex-col justify-center items-start">
                   <h1 className="text-4xl font-bold mb-4 text-green-600">
                     {currPlaylist?.name}

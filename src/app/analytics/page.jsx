@@ -11,7 +11,7 @@ const Analytics = () => {
       <RecentlyPlayed />
       <TopTracks/>
       <TopArtists/>
-      {/* <GetRecomendations/> */}
+      <GetRecomendations/>
     </div>
   )
 }
