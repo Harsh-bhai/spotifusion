@@ -6,7 +6,6 @@ const setup = (set) => ({
   setAccessToken: (accessToken) => set({ accessToken }),
   removeAccessToken: () => {
     set({ accessToken: null });
-    localStorage.removeItem("spotify");
   },
 
   spotifyId: null,

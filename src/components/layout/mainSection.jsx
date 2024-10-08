@@ -25,7 +25,7 @@ const MainSection = () => {
             <SpiningLogo />
 
             <div className="flex flex-col justify-center items-start">
-              <h1 className="lg:text-7xl text-4xl font-bold bg-gradient-to-br from-green-100 via-green-400 to-green-700 bg-clip-text text-transparent">
+              <h1 className="lg:text-7xl text-4xl font-bold bg-gradient-to-br from-green-800 via-green-400 to-green-800 bg-clip-text text-transparent">
                 SpotiFusion
               </h1>
               <p className="lg:py-6 py-4 ml-2 text-xs lg:text-base">
@@ -34,11 +34,12 @@ const MainSection = () => {
             </div>
           </div>
 
-         {!accessToken ? <SpotifyButton text={"Login with Spotify"} onClick={() => signIn("spotify", { callbackUrl: "/options" })}/>
-          :
-          <Link href="/options">
+         {/* {!accessToken ? <SpotifyButton text={"Login with Spotify"} onClick={() => signIn("spotify", { callbackUrl: "/options" })}/>
+          : */}
+          <Link href="/login">
             <SpotifyButton text={"Get Started"} />
-          </Link>}
+          </Link>
+          {/* } */}
         </div>
       </div>
     </div>

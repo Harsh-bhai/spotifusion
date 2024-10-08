@@ -9,7 +9,7 @@ const SpiningLogo = () => {
         alt="SpotiFusion Logo"
         width={200}
         height={200}
-        className="animate-slowSpin size-24 lg:size-max"
+        className="animate-slowSpin size-24 lg:size-52"
       />
       <Image
         src="/logo/spotify.png"
