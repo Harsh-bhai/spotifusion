@@ -4,10 +4,11 @@ import TrackCard from "./trackCard";
 import { useState, useEffect } from "react";
 import HeadingWrapper from "../wrappers/headingWrapper";
 import Divider from "../layout/divider";
+import TrackCardSkeletonWrapper from "../wrappers/trackCardSkeletonWrapper";
 
 const TopTracks = () => {
   const spotifyApi = UseSpotify();
-  const [tracks, setTracks] = useState();
+  const [tracks, setTracks] = useState([]);
   useEffect(() => {
     if (spotifyApi) {
       spotifyApi.getMyTopTracks().then((data) => {
@@ -17,20 +18,26 @@ const TopTracks = () => {
       });
     }
   }, [spotifyApi]);
-  
+
   return (
     <div>
-      <HeadingWrapper
-        heading={"Top Tracks"}
-        desc={"Your top 5 most played tracks are below"}
-      >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-          {tracks?.slice(0, 5).map((track) => (
-            <TrackCard song={track} key={track.id} />
-          ))}
+      {tracks?.length === 0 ? (
+        <TrackCardSkeletonWrapper />
+      ) : (
+        <div>
+          <HeadingWrapper
+            heading={"Top Tracks"}
+            desc={"Your top 5 most played tracks are below"}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+              {tracks?.slice(0, 5).map((track) => (
+                <TrackCard song={track} key={track.id} />
+              ))}
+            </div>
+          </HeadingWrapper>
+          <Divider />
         </div>
-      </HeadingWrapper>
-      <Divider />
+      )}
     </div>
   );
 };
