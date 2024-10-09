@@ -11,8 +11,7 @@ import { useSpotifyStore } from "@/store/useSpotifyStore";
 const Options = () => {
   const spotifyApi = UseSpotify();
   const { setPlaylists } = usePlaylistStore();
-  const { setTagMap } = useTagStore();
-  const { setSpotifyId } = useSpotifyStore();
+  const { setSpotifyId, setUserInfo } = useSpotifyStore();
 
   const createSpotifyUser = async(userInfo) =>{
     let data = await fetch("/api/addspotifyuser", {
@@ -42,14 +41,14 @@ const Options = () => {
       spotifyApi.getMe().then((data) => {
         if (data.body) {
           console.log(data.body);
-          
+          setUserInfo(data.body);
           createSpotifyUser(data.body);
           // fetchTags(data.body.id);
           setSpotifyId(data.body.id);
         }
       });
     }
-  }, [spotifyApi, setPlaylists, setSpotifyId]);
+  }, [spotifyApi, setPlaylists, setSpotifyId, setUserInfo]);
 
   return (
     <div className="min-h-screen flex flex-col items-center py-12 px-4 lg:px-16">

@@ -3,37 +3,30 @@ import React from 'react'
 import Image from 'next/image'
 import UseSpotify from '@/hooks/useSpotify'
 import { useEffect, useState } from 'react'
+import { useSpotifyStore } from '@/store/useSpotifyStore';
+import countries from '@/utils/country';
 const Profile = () => {
   const spotifyApi = UseSpotify();
+  const { userInfo } = useSpotifyStore();
+  console.log(userInfo, "userinfo");
 
-  const [profile, setProfile] = useState()
-
-  useEffect(() => {
-    if (spotifyApi) {
-      spotifyApi.getMe().then((data) => {
-        if (data.body) {
-          console.log(data.body);
-          
-          setProfile(data.body);
-        }
-      });
-    }
-  }, [spotifyApi]);
+  
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
-  <div className="hero-content flex-col lg:flex-row">
+    <div className="hero min-h-screen">
+  <div className="hero-content flex-col">
     <Image
-      src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-      className="max-w-sm rounded-lg shadow-2xl" width={300} height={300} alt="img" />
-    <div>
-      <h1 className="text-5xl font-bold">Box Office News!</h1>
-      <p className="py-6">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
-      </p>
-      <button className="btn btn-primary">Get Started</button>
-    </div>
+      src={userInfo?.images[1]?.url}
+      className="max-w-sm rounded-full shadow-2xl" width={300} height={300} alt="img" />
+     <div className="space-y-4 text-center">
+            <h1 className="text-4xl font-bold">{userInfo?.display_name}</h1>
+            <p className="text-xl">Email: {userInfo?.email}</p>
+            <p className="text-xl">Country: {countries[userInfo?.country]}</p>
+            <p className="text-xl ">
+              Spotify Version: {userInfo?.product === "premium" ? "Premium" : "Free"}
+            </p>
+            <p className="text-xl">Followers: {userInfo?.followers?.total}</p>
+          </div>
   </div>
 </div>
   )

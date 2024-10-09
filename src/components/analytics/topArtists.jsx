@@ -22,7 +22,7 @@ const TopArtists = () => {
     }
 
     pushArtistsIds();
-  }, [spotifyApi]);
+  }, [spotifyApi, artistsArr]);
 
   const pushArtistsIds = () => {
     if (artists.length > 0) {

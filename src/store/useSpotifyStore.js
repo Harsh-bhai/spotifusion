@@ -4,13 +4,15 @@ import { persist, createJSONStorage } from "zustand/middleware";
 const setup = (set) => ({
   accessToken: null,
   setAccessToken: (accessToken) => set({ accessToken }),
-  removeAccessToken: () => {
-    set({ accessToken: null });
-  },
-
+  removeAccessToken: () =>
+    new Promise((resolve) => {
+      set({ accessToken: null });
+      resolve(); // Resolve the promise after the state is set
+    }),
   spotifyId: null,
   setSpotifyId: (spotifyId) => set({ spotifyId }),
-
+  userInfo: null,
+  setUserInfo: (userInfo) => set({ userInfo }),
 });
 
 export const useSpotifyStore = create(

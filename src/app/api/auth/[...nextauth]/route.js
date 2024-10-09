@@ -64,7 +64,6 @@ export const authOptions = {
     },
     
     async session({ session, token }) {
-      console.log("Session data:", { session, token });
       session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
       session.user.username = token.username;

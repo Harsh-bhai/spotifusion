@@ -6,11 +6,13 @@ import { MdOutlineDarkMode } from "react-icons/md";
 import { useThemeStore } from "@/store/useThemeStore";
 import { useSpotifyStore } from "@/store/useSpotifyStore";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const themes = ["light", "dark", "forest", "halloween"];
   const { setTheme } = useThemeStore();
-  const { accessToken, removeAccessToken } = useSpotifyStore();
+  const { accessToken, removeAccessToken, userInfo } = useSpotifyStore();
+  const router = useRouter();
   return (
     <div className="navbar ">
       {/* logo */}
@@ -110,7 +112,7 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <Image
                   alt="User Avatar"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src={userInfo?.images[0]?.url}
                   width={50}
                   height={50}
                 />
@@ -124,14 +126,16 @@ const Navbar = () => {
                 <Link href="/profile">Profile</Link>
               </li>
               <li
-                onClick={() => {
-                  removeAccessToken();
-                  signOut({ callbackUrl: "/" });
+                onClick={async () => {
+                  await removeAccessToken(); // Wait for the access token to be removed
+                  signOut(); // Then sign out
+                  localStorage.removeItem("spotify");
+                  router.push("/login");
                 }}
               >
                 <a>Logout</a>
               </li>
-            </ul>
+            </ul> 
           </div>
         )}
       </div>
