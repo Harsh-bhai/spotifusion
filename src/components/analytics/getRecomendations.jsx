@@ -11,13 +11,26 @@ import GetRecomWrapper from "../wrappers/getRecomWrapper";
 const GetRecomendations = () => {
   const spotifyApi = UseSpotify();
   const [getRecom, setGetRecom] = useState([]);
-  const { artistsArr, setSongids, songids } = useRecomendStore();
+  const [artistsArr, setArtistsArr] = useState([]);
+  const { setSongids, songids } = useRecomendStore();
   const [reload, setReload] = useState(1);
   const [playlistId, setPlaylistId] = useState("");
   const randomNo = Math.floor(Math.random() * 100) + 1;
 
   useEffect(() => {
-    if (spotifyApi && artistsArr) {
+    spotifyApi.getMyTopArtists().then((data) => {
+      if (data.body) {
+        setArtistsArr(data.body.items.slice(0, 5).map((artist) => artist.id));
+      }
+    });
+  }, [spotifyApi, reload]);
+  
+
+  useEffect(() => {
+    if (spotifyApi && artistsArr.length > 0) {
+     
+
+      // fetching recommendations
       spotifyApi
         .getRecommendations({
           seed_artists: artistsArr,
@@ -33,9 +46,9 @@ const GetRecomendations = () => {
           }
         });
     }
-  }, [artistsArr, spotifyApi, reload, setSongids]);
+  }, [spotifyApi, reload, setSongids, artistsArr]);
 
-  const createNewPlaylist = async (e, playlistName, songUris, randomNo) => {
+  const createNewPlaylist = async (e, playlistName, songUris) => {
     e.preventDefault();
 
     try {
@@ -43,7 +56,7 @@ const GetRecomendations = () => {
       const createPlaylistResponse = await spotifyApi.createPlaylist(
         playlistName,
         {
-          description: `Spotifusion Recomendations ${randomNo}`,
+          description: `Spotifusion Recomendations`,
           public: true, // Change to false if you want a private playlist
         }
       );
@@ -71,7 +84,7 @@ const GetRecomendations = () => {
         <div>
           <SuccessModal playlistId={playlistId} />
           <HeadingWrapper
-            heading={"Get Recomendations"}
+            heading={"Recomendations"}
             desc={"Songs based on your top artists are below"}
             btnText={"Create Playlist"}
             setState={() => setReload(reload + 1)} // Refreshes on click
@@ -79,8 +92,7 @@ const GetRecomendations = () => {
               createNewPlaylist(
                 e,
                 `Spotifusion Recomendations ${randomNo}`,
-                songids,
-                randomNo
+                songids
               )
             }
           >

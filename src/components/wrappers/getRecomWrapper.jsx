@@ -7,7 +7,7 @@ const GetRecomWrapper = () => {
   return (
     <div>
       <HeadingWrapper
-        heading={"Get Recomendations"}
+        heading={"Recomendations"}
         desc={"Songs based on your top artists are below"}
         btnText={"Create Playlist"}
         setState={() => setReload(reload + 1)} // Refreshes on click
