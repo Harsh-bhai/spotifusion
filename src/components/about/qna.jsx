@@ -17,7 +17,7 @@ const QnA = () => {
     },
   ];
   return (
-    <div>
+    <div className="md:w-1/2 w-8/12">
       {data.map((item) => (
         <Accordion key={item.title} title={item.title} desc={item.desc} />
       ))}

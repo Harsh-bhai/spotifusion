@@ -16,7 +16,7 @@ const Profile = () => {
     <div className="hero min-h-screen">
   <div className="hero-content flex-col">
     <Image
-      src={userInfo?.images[1]?.url}
+      src={userInfo?.images[0]?.url}
       className="max-w-sm rounded-full shadow-2xl" width={300} height={300} alt="img" />
      <div className="space-y-4 text-center">
             <h1 className="text-4xl font-bold">{userInfo?.display_name}</h1>

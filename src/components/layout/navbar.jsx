@@ -9,7 +9,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const themes = ["light", "dark", "forest", "halloween"];
+  const themes = ["light", "dark", "forest"];
   const { setTheme } = useThemeStore();
   const { accessToken, removeAccessToken, userInfo } = useSpotifyStore();
   const router = useRouter();

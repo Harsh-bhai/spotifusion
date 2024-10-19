@@ -48,7 +48,7 @@ module.exports = {
   ],
 
   daisyui: {
-    themes: ["light", "dark", "forest", "halloween", "wireframe"],
+    themes: ["light", "dark", "forest"],
   },
   
 };
