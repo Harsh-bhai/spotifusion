@@ -14,12 +14,12 @@ const PlaylistCard = ({ title, img, description, onClick }) => {
           src={img}
           alt="playlist"
           width={300} height={300}
-          className="rounded-lg"
+          className="rounded-sm lg:rounded"
         />
       </figure>
       <div className="card-body p-4">
         <h2 className={`${theme === "light" ? "group-hover:text-green-700" : "group-hover:text-green-300"} card-title text-lg font-semibold`}>{title}</h2>
-        <p className="text-sm text-gray-500 line-clamp-2">{description}</p>
+        {/* <p className="text-sm text-gray-500 line-clamp-2">{description}</p> */}
       </div>
     </div>
   )

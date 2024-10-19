@@ -19,7 +19,7 @@ export default function TrackCard({ song }) {
         alt={song?.name}
         width={64}
         height={64}
-        className="w-16 h-16 object-cover rounded-md"
+        className="w-16 h-16 object-cover rounded-sm md:rounded"
       />
       <div className="flex flex-col">
         <h3

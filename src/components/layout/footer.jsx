@@ -4,9 +4,9 @@ const Footer = () => {
   return (
     <footer className="footer  text-neutral-content p-10">
   <aside>
-  <Image src={'/logo/logo.png'} width={50} height={50} alt={'SoundFusion Logo'} />
+  <Image src={'/logo/logo.png'} width={50} height={50} alt={'SpotiFusion Logo'} />
     <p>
-    SoundFusion
+    SpotiFusion
       <br />
       Tag n Play
     </p>

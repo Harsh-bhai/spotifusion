@@ -51,7 +51,7 @@ const Navbar = () => {
             src={"/logo/logo.png"}
             width={50}
             height={50}
-            alt={"SoundFusion Logo"}
+            alt={"SpotiFusion Logo"}
           />
         </Link>
       </div>
