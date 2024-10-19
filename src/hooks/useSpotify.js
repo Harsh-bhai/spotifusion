@@ -23,7 +23,7 @@ const UseSpotify = () => {
         setAccessToken(session.user.accessToken);
       }
     }
-  }, [session, accessToken, setAccessToken]);
+  }, [session]);
 
   return useMemo(() => {
     if (accessToken) {

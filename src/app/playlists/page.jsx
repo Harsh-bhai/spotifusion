@@ -22,7 +22,7 @@ const Playlist = () => {
             <PlaylistCard
               key={playlist.id}
               title={playlist.name}
-              img={playlist.images[0]?.url || "/default-image.jpg"} // fallback if image is not available
+              img={playlist?.images ?  playlist?.images[0]?.url : "/logo/logo.png"} // fallback if image is not available
               description={playlist.description || "No description available"}
               onClick={() => {
                 setCurrPlaylist(playlist);
