@@ -56,7 +56,7 @@ const GetRecomendations = () => {
       const createPlaylistResponse = await spotifyApi.createPlaylist(
         playlistName,
         {
-          description: `SpottiFusion Recomendations`,
+          description: `SoundFusion Recomendations`,
           public: true, // Change to false if you want a private playlist
         }
       );
@@ -91,7 +91,7 @@ const GetRecomendations = () => {
             onClick={(e) =>
               createNewPlaylist(
                 e,
-                `SpottiFusion Recomendations ${randomNo}`,
+                `SoundFusion Recomendations ${randomNo}`,
                 songids
               )
             }

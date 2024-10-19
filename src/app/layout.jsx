@@ -19,7 +19,7 @@ const fontGeistMono = localFont({
 });
 
 export const metadata = {
-  title: "SpottiFusion",
+  title: "SoundFusion",
   description: "A tag-based music organizer for Spotify",
 };
 

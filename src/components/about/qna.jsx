@@ -4,11 +4,11 @@ import Accordion from "./accordion";
 const QnA = () => {
   const data = [
     {
-      title: "What is SpottiFusion?",
-      desc: "SpottiFusion is a web app that helps you organize your music with the help of TAGS. It allows you to create, modify your spotify playlist on the basis of TAGS.",
+      title: "What is SoundFusion?",
+      desc: "SoundFusion is a web app that helps you organize your music with the help of TAGS. It allows you to create, modify your spotify playlist on the basis of TAGS.",
     },
     {
-      title: "Why SpottiFusion?",
+      title: "Why SoundFusion?",
       desc: "It allows you to organize your playlists, songs according to your Mood using TAGS. Use your Creativity and Create best playlists according to your Mood",
     },
     {
