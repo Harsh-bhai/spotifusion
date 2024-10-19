@@ -26,7 +26,7 @@ const MainSection = () => {
 
             <div className="flex flex-col justify-center items-start">
               <h1 className="lg:text-7xl text-4xl font-bold bg-gradient-to-br from-green-800 via-green-400 to-green-800 bg-clip-text text-transparent">
-                SpotiFusion
+                SpottiFusion
               </h1>
               <p className="lg:py-6 py-4 ml-2 text-xs lg:text-base">
                 Organize your music - with the power of TAGS
