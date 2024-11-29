@@ -14,12 +14,23 @@ export async function middleware(request) {
     return NextResponse.next();
   }
 
-  // allow these paths
-  if (pathname == "/" || pathname == "/about" || pathname == "/how-to-use") {
+  // Allow access to public assets
+  if (
+    pathname.startsWith("/_next") || // Next.js assets
+    pathname.startsWith("/favicon.ico") || // Favicon
+    pathname.startsWith("/logo") || // Logo
+    pathname.startsWith("/spotifusion") || // Your custom static assets
+    pathname.startsWith("/public") // Other public files
+  ) {
     return NextResponse.next();
   }
 
-  // if anyone tries to access pages that require authentication
+  // Allow specific paths like /, /about, and /how-to-use
+  if (pathname === "/" || pathname === "/about" || pathname === "/how-to-use") {
+    return NextResponse.next();
+  }
+
+  // Redirect to login if no token is found
   if (!token && pathname !== "/login") {
     return NextResponse.redirect(new URL("/login", request.url));
   }
@@ -27,9 +38,9 @@ export async function middleware(request) {
   return NextResponse.next();
 }
 
-// Apply the middleware to all paths except /api/auth/* and allow static resources for login page
+// Updated matcher to allow static and public resources
 export const config = {
   matcher: [
-    "/((?!api/auth|_next/static|_next/image|favicon.ico|logo).*)", // Exclude api/auth, static assets, favicon, and logo
+    "/((?!api/auth|_next/static|_next/image|favicon.ico|logo|spotifusion|public).*)",
   ],
 };
