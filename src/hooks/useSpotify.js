@@ -14,7 +14,7 @@ const UseSpotify = () => {
   useEffect(() => {
     if (session && !accessToken) {
       if (
-        session.error === "RefreshAccessTokenError" ||
+        // session.error === "RefreshAccessTokenError" ||
         session.expires < Date.now()
       ) {
         console.log("happening");
